@@ -2,48 +2,7 @@
 <html lang="en">
 
     <head>
-        <style>
-            html {
-                height: 100%;
-                background-image: linear-gradient(to bottom right, violet, cyan);
-            }
-            h1 {
-                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            }
-            #createAccountHeader {
-                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-                font-size: 40pt;
-            }
-            div {
-                margin: 5px;
-                text-align: center;
-            }
-            input {
-                margin: 5px;
-                border-radius: 5px;
-                border: 2px solid darkgray;
-                padding: 20px; 
-                width: 270px;
-                height: 3px;
-            }
-            button {
-                font-size: 15px;
-                border: none;
-                border-radius: 5px;
-                color: black;
-                background-color: blueviolet;
-                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-                font-size: 10pt;
-                width: 200px;
-                height: 35px;
-                margin: 25px;
-            }
-            p {
-                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-                text-align: center;
-            }
-
-        </style>
+        <link rel="stylesheet" href="../public/stylesheets/style1.css">
     </head>
     
     <body>
@@ -51,7 +10,7 @@
             <h1>Find Your Flix</h1>
         </header>
         <div>
-            <h1 id="createAccountHeader">Create Account</h1>
+            <h1 class="topic">Create Account</h1>
             <input type="email" placeholder="Email">
             <br>           
             <input type="password" placeholder="Password">
@@ -62,8 +21,7 @@
         </div>
         <footer>
             <p>Have an account? <a href="login.html">Log in</a></p>
-        </footer>
-       
+        </footer>  
     </body>
 
 </html>
