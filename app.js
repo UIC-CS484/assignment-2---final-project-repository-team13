@@ -3,6 +3,7 @@ const cookieSession = require('express-session')
 const passport = require('passport')
 
 require('./services/passport')
+const requireLogin = require('./routes/requireLogin')
 
 const app = express()
 
@@ -18,7 +19,6 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-require('./routes/accountRoute')(app)
 require('./routes/authRoutes')(app)
 
 app.use(express.static('public'));
@@ -33,6 +33,10 @@ app.get('/login', async (req, res) => {
 
 app.get('/signup', async (req, res) => {
     res.status(200).sendFile('./views/createAccount.html', {root: __dirname})
+})
+
+app.get('/account', requireLogin, async (req, res) => {
+    res.status(200).send('sign in successful')
 })
 
 app.use((req, res) => {
