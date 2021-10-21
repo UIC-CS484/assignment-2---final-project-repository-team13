@@ -2,7 +2,7 @@
 <html lang="en">
 
     <head>
-        <link rel="stylesheet" href="/stylesheets/style1.css">
+        <link rel="stylesheet" href="/public/stylesheets/style1.css">
     </head>
 
     <body>
@@ -21,33 +21,7 @@
         <footer>
             <p>Don't have an account? <a href="/signup">Sign up here</a></p>
         </footer>
-        <script>
-            document.querySelector('#btn').addEventListener('click', (e) => {
-
-                e.preventDefault();
-
-                let loginCredentials = {
-                    email: document.getElementById('user').value,
-                    password: document.getElementById('pass').value
-                }
-
-                fetch('http://localhost:3000/api/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(loginCredentials),
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Success:', data);
-                    })
-                    .catch((error) => {
-                        console.error('Error:', error);
-                        document.getElementById('errorMessage').innerHTML = 'Invalid Email or Password!';
-                    });
-            });
-        </script>
+        <script src="/public/javascripts/login.js"></script>
     </body>
 
 </html>
