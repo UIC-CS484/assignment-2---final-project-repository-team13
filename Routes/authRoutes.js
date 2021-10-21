@@ -10,7 +10,6 @@ module.exports = app => {
         let username = req.body.email
         let password = req.body.password
 
-        const saltRound = saltRound
         const salt = bcrypt.genSaltSync(saltRound)
         const hashPass = bcrypt.hashSync(password, salt)
 
@@ -18,7 +17,7 @@ module.exports = app => {
             if (err) {
                 return res.status(404).send({ success: false, error: err.message });
             }
-            res.status(200).send({sucess: true})
+            res.status(200).send({success: true})
         })
     })
 
@@ -34,7 +33,7 @@ module.exports = app => {
             if (err) {
                 return res.status(404).send({ success: false, error: err.message });
             }
-            res.status(200).send({sucess: true})
+            res.status(200).send({success: true})
         })
     })
 
@@ -45,7 +44,7 @@ module.exports = app => {
             if (err) {
                 return res.status(404).send({ success: false, error: err.message });
             }
-            res.status(200).send({sucess: true})
+            res.status(200).send({success: true})
         })
     })
 
