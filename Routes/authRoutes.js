@@ -1,15 +1,16 @@
 const passport = require('passport')
 const bcrypt = require('bcrypt')
 
-
+const saltRound = require('../config').saltRound
 const db = require('../services/database')
+const requireLogin = require('./requireLogin');
 
 module.exports = app => {
-    app.post('/api/signup', (req, res, next) => {
-        let username = req.body.username
+    app.post('/api/signup', (req, res) => {
+        let username = req.body.email
         let password = req.body.password
 
-        const saltRound = 13
+        const saltRound = saltRound
         const salt = bcrypt.genSaltSync(saltRound)
         const hashPass = bcrypt.hashSync(password, salt)
 
@@ -21,14 +22,43 @@ module.exports = app => {
         })
     })
 
-    app.post('/api/login', (req, res, next) => {
-        passport.authenticate('local', {
-            successRedirect: '/account',
-            failureRedirect: '/'
-        })(req, res, next)
+    app.put('/api/password', requireLogin, (req, res) => {
+        let username = req.body.email
+        let newPassword = req.body.password
+
+        const saltRound = saltRound
+        const salt = bcrypt.genSaltSync(saltRound)
+        const hashPass = bcrypt.hashSync(newPassword, salt)
+
+        db.run('UPDATE User SET password = ? WHERE username = ?', [hashPass, username], (err) => {
+            if (err) {
+                return res.status(404).send({ success: false, error: err.message });
+            }
+            res.status(200).send({sucess: true})
+        })
     })
 
+    app.delete('/api/account', requireLogin, (req, res) => {
+        let username = req.body.email
 
+        db.run('DELETE from User WHERE username = ?', [username], (err) => {
+            if (err) {
+                return res.status(404).send({ success: false, error: err.message });
+            }
+            res.status(200).send({sucess: true})
+        })
+    })
+
+    app.post('/api/login', (req, res, next) => {
+        passport.authenticate('local', (err, user, info) => {
+            if (err) return next(err)
+            if (!user) return res.status(404).send({success: false, error: 'User Not Found'})
+            req.logIn(user, (err) => {
+                if (err) return next(err)
+                return res.status(200).send({success: true})
+            })
+        })(req, res, next)
+    })
 
     app.get('/api/logout', (req, res) => {
         req.logout();
