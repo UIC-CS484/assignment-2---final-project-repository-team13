@@ -11,35 +11,42 @@
         </header>
         <form id="loginForm">
             <h1 class="topic">Login</h1>
+            <h2 id="errorMessage"></h2>
             <input id='user' type="email" placeholder="Email">
             <br>           
             <input id='pass' type="password" placeholder="Password">
             <br>
-            <button type="submit">Login</button>
+            <button id='btn' type="button">Login</button>
         </form>
         <footer>
             <p>Don't have an account? <a href="/signup">Sign up here</a></p>
         </footer>
         <script>
-            let loginCredentials = {
-                email: document.getElementById('user').value,
-                password: document.getElementById('pass').value
-            }
-            fetch('http://localhost:3000/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(loginCredentials),
-                })
-                .then(response => response.json())
-                .then(data => {
-                console.log('Success:', data);
-                })
-                .catch((error) => {
-                console.error('Error:', error);
-                });
+            document.querySelector('#btn').addEventListener('click', (e) => {
 
+                e.preventDefault();
+
+                let loginCredentials = {
+                    email: document.getElementById('user').value,
+                    password: document.getElementById('pass').value
+                }
+
+                fetch('http://localhost:3000/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(loginCredentials),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        document.getElementById('errorMessage').innerHTML = 'Invalid Email or Password!';
+                    });
+            });
         </script>
     </body>
 
