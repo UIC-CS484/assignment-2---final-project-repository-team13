@@ -3,7 +3,6 @@ const cookieSession = require('express-session')
 const passport = require('passport')
 
 require('./services/passport')
-const requireLogin = require('./routes/requireLogin')
 
 const app = express()
 
@@ -18,30 +17,10 @@ app.use(
 );
 app.use(passport.initialize())
 app.use(passport.session())
-
-require('./routes/authRoutes')(app)
-
 app.use(express.static('public'));
 
-app.get('/', async (req, res) => {
-    res.status(200).sendFile('./views/index.html', {root: __dirname})
-})
-
-app.get('/login', async (req, res) => {
-    res.status(200).sendFile('./views/login.html', {root: __dirname})
-});
-
-app.get('/signup', async (req, res) => {
-    res.status(200).sendFile('./views/createAccount.html', {root: __dirname})
-})
-
-app.get('/account', requireLogin, async (req, res) => {
-    res.status(200).send('sign in successful')
-})
-
-app.use((req, res) => {
-    res.status(404).sendFile('./views/404.html', {root: __dirname})
-})
+require('./routes/authRoutes')(app)
+require('./routes/viewRoutes')(app)
 
 const PORT = 3000 || process.env.PORT
 app.listen(PORT, () => {
