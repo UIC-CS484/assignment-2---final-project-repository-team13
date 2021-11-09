@@ -9,5 +9,5 @@ We will write tests after each feature we implement, to make sure that it is a f
 
 ## ER Diagram of Database
 
-![ERDiagram.PNG](ERDiagram.png)
+![ERDiagram.png](ERDiagram.png s)
 
