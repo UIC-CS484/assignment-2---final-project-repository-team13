@@ -9,5 +9,9 @@ We will write tests after each feature we implement, to make sure that it is a f
 
 ## ER Diagram of Database
 
+```
+Note: Bold word means that attributes is NOT NULL
+```
+
 ![ERDiag.png](ERDiag.png)
 
