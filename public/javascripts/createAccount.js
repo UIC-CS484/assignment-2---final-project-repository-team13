@@ -19,10 +19,12 @@ document.querySelector('#btn').addEventListener('click', (e) => {
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
+                if (data.success == false) {
+                    document.getElementById('errorMessage').innerHTML = 'Account Already Exists!';
+                }
             })
             .catch((error) => {
                 console.error('Error:', error);
-                document.getElementById('errorMessage').innerHTML = 'Try Again with Different Credentials!';
             });
 
     } else {
