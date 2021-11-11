@@ -4,9 +4,10 @@ const bcrypt = require('bcrypt')
 const saltRound = require('../config').saltRound
 const db = require('../services/database')
 const requireLogin = require('./requireLogin');
+const ifNotLoggedIn = require('./ifNotLoggedIn');
 
 module.exports = app => {
-    app.post('/api/signup', (req, res) => {
+    app.post('/api/signup', ifNotLoggedIn, (req, res) => {
         let firstname = req.body.firstname
         let lastname = req.body.lastname
         let username = req.body.email
@@ -50,7 +51,7 @@ module.exports = app => {
         })
     })
 
-    app.post('/api/login', (req, res, next) => {
+    app.post('/api/login', ifNotLoggedIn, (req, res, next) => {
         passport.authenticate('local', (err, user, info) => {
             if (err) return next(err)
             if (!user) return res.status(404).send({success: false, error: 'User Not Found'})
@@ -61,7 +62,11 @@ module.exports = app => {
         })(req, res, next)
     })
 
-    app.get('/api/logout', (req, res) => {
+    app.get('/user', requireLogin, (req, res) => {
+        res.send(req.user);
+    })
+
+    app.get('/api/logout', requireLogin, (req, res) => {
         req.logout();
         res.redirect('/');
     })

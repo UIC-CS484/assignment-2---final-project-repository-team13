@@ -19,6 +19,8 @@ document.querySelector('#btn').addEventListener('click', (e) => {
             console.log('Success:', data);
             if (data.success == false) {
                 document.getElementById('errorMessage').innerHTML = 'Invalid Email or Password!';
+            } else {
+                location.href = '/account'
             }
         })
         .catch((error) => {

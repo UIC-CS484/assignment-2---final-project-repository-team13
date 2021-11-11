@@ -1,16 +1,17 @@
 const requireLogin = require('./requireLogin')
+const ifNotLoggedIn = require('./ifNotLoggedIn');
 const path = require('path')
 
 module.exports = app => {
-    app.get('/', async (req, res) => {
+    app.get('/', ifNotLoggedIn, async (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '../views/index.html'))
     })
 
-    app.get('/login', async (req, res) => {
+    app.get('/login', ifNotLoggedIn, async (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '../views/login.html'))
     });
 
-    app.get('/signup', async (req, res) => {
+    app.get('/signup', ifNotLoggedIn, async (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '../views/createAccount.html'))
     })
 
