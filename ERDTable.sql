@@ -1,0 +1,49 @@
+CREATE TABLE IF NOT EXISTS User (
+	userID INTEGER NOT NULL,
+	email TEXT NOT NULL,
+	password TEXT NOT NULL,
+	first_name TEXT,
+	last_name TEXT,
+	PRIMARY KEY("userID" AUTOINCREMENT)
+);
+
+CREATE TABLE IF NOT EXISTS Movies (
+	movieID INTEGER NOT NULL,
+	name TEXT NOT NULL,
+	rating TEXT NOT NULL,
+	director TEXT,
+	release_date datetime,
+	description TEXT,
+	genre TEXT,
+	PRIMARY KEY("movieID" AUTOINCREMENT)
+);
+
+CREATE TABLE IF NOT EXISTS Rating (
+	ratingID INTEGER NOT NULL,
+	userID INTEGER NOT NULL,
+	movieID INTEGER NOT NULL,
+	rating INTEGER,
+	comment TEXT,
+	FOREIGN KEY (userID) REFERENCES User (userID),
+	FOREIGN KEY (movieID) REFERENCES Movies (movieID),
+	PRIMARY KEY("ratingID" AUTOINCREMENT)
+);
+
+CREATE TABLE IF NOT EXISTS Actor (
+	actorID INTEGER NOT NULL,
+	name TEXT NOT NULL,
+	image TEXT NOT NULL,
+	gender TEXT NOT NULL,
+	dob datetime,
+	history TEXT,
+	PRIMARY KEY("actorID" AUTOINCREMENT)
+);
+
+CREATE TABLE IF NOT EXISTS Act (
+	actID INTEGER NOT NULL,
+	actorID INTEGER NOT NULL,
+	movieID INTEGER NOT NULL,
+	FOREIGN KEY (actorID) REFERENCES Actor (actorID),
+	FOREIGN KEY (movieID) REFERENCES Movies (movieID),
+	PRIMARY KEY("actID" AUTOINCREMENT)
+);

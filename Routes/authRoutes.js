@@ -7,13 +7,15 @@ const requireLogin = require('./requireLogin');
 
 module.exports = app => {
     app.post('/api/signup', (req, res) => {
+        let firstname = req.body.firstname
+        let lastname = req.body.lastname
         let username = req.body.email
         let password = req.body.password
 
         const salt = bcrypt.genSaltSync(saltRound)
         const hashPass = bcrypt.hashSync(password, salt)
 
-        db.run('INSERT INTO User (username, password) VALUES(?, ?)', [username, hashPass], (err) => {
+        db.run('INSERT INTO User (email, password, first_name, last_name) VALUES(?, ?, ?, ?)', [username, hashPass, firstname, lastname], (err) => {
             if (err) {
                 return res.status(404).send({ success: false, error: err.message });
             }
@@ -29,7 +31,7 @@ module.exports = app => {
         const salt = bcrypt.genSaltSync(saltRound)
         const hashPass = bcrypt.hashSync(newPassword, salt)
 
-        db.run('UPDATE User SET password = ? WHERE username = ?', [hashPass, username], (err) => {
+        db.run('UPDATE User SET password = ? WHERE email = ?', [hashPass, username], (err) => {
             if (err) {
                 return res.status(404).send({ success: false, error: err.message });
             }
@@ -40,7 +42,7 @@ module.exports = app => {
     app.delete('/api/account', requireLogin, (req, res) => {
         let username = req.body.email
 
-        db.run('DELETE from User WHERE username = ?', [username], (err) => {
+        db.run('DELETE from User WHERE email = ?', [username], (err) => {
             if (err) {
                 return res.status(404).send({ success: false, error: err.message });
             }

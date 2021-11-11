@@ -16,7 +16,7 @@ passport.use(new localStrategy({
         usernameField: 'email',
         passwordField: 'password'
     }, function (username, password, done) {
-        db.all(`SELECT * FROM User WHERE username = ?`, [username] , (err, rows) => {
+        db.all(`SELECT * FROM User WHERE email = ?`, [username] , (err, rows) => {
             if (err) return done(err)
             if (rows.length == 0) return done(null, false, {message: 'Incorrect username'})
             if (!bcrypt.compareSync(password, rows[0].password)) return done(null, false, {message: 'Incorrect password'})
