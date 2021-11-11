@@ -5,6 +5,8 @@ document.querySelector('#btn').addEventListener('click', (e) => {
     if (document.getElementById('pass').value == document.getElementById('repass').value) {
 
         let loginCredentials = {
+            firstname: document.getElementById('firstname').value,
+            lastname: document.getElementById('lastname').value,
             email: document.getElementById('user').value,
             password: document.getElementById('pass').value
         }

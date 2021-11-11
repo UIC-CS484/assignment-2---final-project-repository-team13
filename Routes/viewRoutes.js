@@ -15,7 +15,7 @@ module.exports = app => {
     })
 
     app.get('/account', requireLogin, async (req, res) => {
-        res.status(200).send('sign in successful')
+        res.status(200).sendFile(path.join(__dirname, '../views/account.html'))
     })
 
     app.use((req, res) => {
