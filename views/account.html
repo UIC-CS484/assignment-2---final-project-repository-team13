@@ -13,18 +13,18 @@
         <div>
             <h1 id="name"></h1>
 
+            <p>Trending: </p>
 
-
-            <table class='table table-sortable'>
+            <table>
                 <thead>
                     <tr>
-                        <th>Rank</th>
-                        <th>Title</th>
-                        <th>Rating</th>
-                        <th>Number of Ratings</th>
+                        <th id='rank' onclick="sortByRank()">Rank ▲</th>
+                        <th id='title' onclick="sortByTitle()">Title ▲▼</th>
+                        <th id='rating' onclick="sortByRating()">Rating ▲▼</th>
+                        <th id='numOfRate' onclick="sortByNumOfRate()">Number of Ratings ▲▼</th>
                     </tr>
                 </thead>
-                <tbody id='topTrendingTable'></tbody>
+                <tbody id='topTrendingTableBody'></tbody>
             </table>
 
 
