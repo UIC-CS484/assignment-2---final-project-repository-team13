@@ -21,7 +21,7 @@ input {
     width: 270px;
     height: 3px;
 }
-button {
+#btn {
     font-size: 15px;
     border: none;
     border-radius: 5px;
@@ -37,9 +37,21 @@ p {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: center;
 }
-#errorMessage{
+#errorMessage {
     font-size: 15px;
     color: red;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: center;
+}
+#movePrev {
+    display:inline;
+    float:left;
+    margin-left: 45%;
+    font-size: 50pt;
+}
+#moveNext {
+    display:inline;
+    float:right;
+    margin-right: 45%;
+    font-size: 50pt;
 }

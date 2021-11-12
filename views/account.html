@@ -3,7 +3,6 @@
 
     <head>
         <link rel="stylesheet" href="/stylesheets/style1.css">
-        <link rel="stylesheet" href="/stylesheets/sortableTable.css">
     </head>
 
     <body>
@@ -12,27 +11,21 @@
         </header>
         <div>
             <h1 id="name"></h1>
-
-            <p>Trending: </p>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th id='rank' onclick="sortByRank()">Rank ▲</th>
-                        <th id='title' onclick="sortByTitle()">Title ▲▼</th>
-                        <th id='rating' onclick="sortByRating()">Rating ▲▼</th>
-                        <th id='numOfRate' onclick="sortByNumOfRate()">Number of Ratings ▲▼</th>
-                    </tr>
-                </thead>
-                <tbody id='topTrendingTableBody'></tbody>
-            </table>
-
-
-
+            <a href="/account/trending">
+                <button id='btn' type="button">Trending</button>
+            </a>
+            <a href="/account/latest">
+                <button id='btn' type="button">Latest</button>
+            </a>
+            <a href="/account/now_playing">
+                <button id='btn' type="button">Trending</button>
+            </a>
             <a href="/api/logout">
-                <button id='logoutBtn' type="button">Log Out</button>
+                <button id='btn' type="button">Log Out</button>
             </a>
         </div>
     </body>
+
     <script src="/javascripts/account.js"></script>
+
 </html>

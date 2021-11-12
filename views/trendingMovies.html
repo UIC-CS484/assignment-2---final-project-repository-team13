@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <link rel="stylesheet" href="/stylesheets/style1.css">
+        <link rel="stylesheet" href="/stylesheets/sortableTable.css">
+    </head>
+
+    <body>
+        <header>
+            <h1>Find Your Flix</h1>
+        </header>
+        <div>
+            <h1 id="name">Trending: </h1>
+
+            <main>
+                <table>
+                    <thead>
+                        <tr>
+                            <th id='rank' onclick="sortByRank()">Rank ▲</th>
+                            <th id='title' onclick="sortByTitle()">Title ▲▼</th>
+                            <th id='rating' onclick="sortByRating()">Rating ▲▼</th>
+                            <th id='numOfRate' onclick="sortByNumOfRate()">Number of Ratings ▲▼</th>
+                        </tr>
+                    </thead>
+                    <tbody id='tableBody'></tbody>
+                </table>
+                <div class='pageBtns'>
+                    <h2 id='movePrev' onclick='moveToPrevPage()'></h2>
+                    <h2 id='moveNext' onclick='moveToNextPage()'>&rarr;</h2>
+                </div>
+            </main>
+
+        </div>
+    </body>
+
+    <script src="/javascripts/fetchMovies.js"></script>
+
+</html>

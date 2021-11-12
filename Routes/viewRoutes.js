@@ -19,6 +19,18 @@ module.exports = app => {
         res.status(200).sendFile(path.join(__dirname, '../views/account.html'))
     })
 
+    app.get('/account/trending', requireLogin, async (req, res) => {
+        res.status(200).sendFile(path.join(__dirname, '../views/trendingMovies.html'))
+    })
+
+    app.get('/account/latest', requireLogin, async (req, res) => {
+        res.status(200).sendFile(path.join(__dirname, '../views/latestMovies.html'))
+    })
+
+    app.get('/account/now_playing', requireLogin, async (req, res) => {
+        res.status(200).sendFile(path.join(__dirname, '../views/nowPlayingMovies.html'))
+    })
+
     app.use((req, res) => {
         res.status(404).sendFile(path.join(__dirname, '../views/404.html'))
     })
