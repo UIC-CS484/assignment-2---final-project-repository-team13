@@ -23,10 +23,6 @@ module.exports = app => {
         res.status(200).sendFile(path.join(__dirname, '../views/trendingMovies.html'))
     })
 
-    app.get('/account/latest', requireLogin, async (req, res) => {
-        res.status(200).sendFile(path.join(__dirname, '../views/latestMovies.html'))
-    })
-
     app.get('/account/now_playing', requireLogin, async (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '../views/nowPlayingMovies.html'))
     })

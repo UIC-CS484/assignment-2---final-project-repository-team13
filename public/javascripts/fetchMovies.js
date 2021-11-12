@@ -6,14 +6,17 @@ whichDoc();
 whichFetch();
 
 function whichDoc() {
-    var fileName = location.pathname.split("/").slice(-1)
+    var fileName = location.pathname.split("/").slice(-1);
+    console.log(fileName);
     if (fileName == 'trending') {
         whichFetch = () => {getTrendingMovies();};
-    } else if (fileName == 'latest') {
-        whichFetch = () => {getLatestMovies();};
     } else if (fileName == 'now_playing') {
         whichFetch = () => {getNowPlayingMovies();};
     }
+}
+
+function goBack() {
+    location.href = '/account';
 }
 
 function getTrendingMovies() {
@@ -35,26 +38,6 @@ fetch('http://localhost:3000/movie/trending?page=' + pageNum)
         console.error('Error:', error);
     });
 }
-
-function getLatestMovies() {
-    fetch('http://localhost:3000/movie/latest?page=' + pageNum)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            for (let i = 0; i < data.length; i++) {
-                data[i].rank = ((pageNum-1)*20) + i + 1;
-            }
-            movies = data;
-            let tableRows = '';
-            for (let i = 0; i < movies.length; i++) {
-                tableRows = tableRows + '<tr> <td>' + data[i].rank + '</td> <td>' + data[i].title + '</td> <td>' + data[i].vote_average + '</td> <td>' + data[i].vote_count + '</td> </tr>';
-            }
-            document.getElementById('tableBody').innerHTML = tableRows;
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
 
 function getNowPlayingMovies() {
     fetch('http://localhost:3000/movie/now_playing?page=' + pageNum)
@@ -82,6 +65,9 @@ function moveToPrevPage() {
         document.getElementById('movePrev').innerHTML = "";
     } else {
         pageNum = pageNum - 1;
+        if (pageNum == 1) {
+            document.getElementById('movePrev').innerHTML = "";
+        }
         whichFetch();
     }
 }

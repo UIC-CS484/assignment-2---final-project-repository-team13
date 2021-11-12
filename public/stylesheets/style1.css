@@ -46,12 +46,12 @@ p {
 #movePrev {
     display:inline;
     float:left;
-    margin-left: 45%;
+    margin-left: 40%;
     font-size: 50pt;
 }
 #moveNext {
     display:inline;
     float:right;
-    margin-right: 45%;
+    margin-right: 40%;
     font-size: 50pt;
 }

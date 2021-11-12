@@ -8,7 +8,7 @@
 
     <body>
         <header>
-            <h1>Find Your Flix</h1>
+            <h1 onclick='goBack()'>Find Your Flix</h1>
         </header>
         <div>
             <h1 id="name">Now Playing: </h1>
@@ -25,8 +25,10 @@
                     </thead>
                     <tbody id='tableBody'></tbody>
                 </table>
-                <h2 id='movePrev' onclick='moveToPrevPage()'></h2>
-                <h2 id='moveNext' onclick='moveToNextPage()'>&rarr;</h2>
+                <div class='pageBtns'>
+                    <h2 id='movePrev' onclick='moveToPrevPage()'></h2>
+                    <h2 id='moveNext' onclick='moveToNextPage()'>&rarr;</h2>
+                </div>
             </main>
 
         </div>
