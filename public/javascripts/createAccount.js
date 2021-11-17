@@ -23,6 +23,8 @@ document.querySelector('#btn').addEventListener('click', (e) => {
                 console.log('Success:', data);
                 if (data.success == false) {
                     document.getElementById('errorMessage').innerHTML = 'Account Already Exists!';
+                } else {
+                    location.href = '/login'
                 }
             })
             .catch((error) => {
