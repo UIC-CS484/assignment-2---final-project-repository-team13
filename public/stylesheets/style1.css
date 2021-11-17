@@ -2,17 +2,21 @@ html {
     height: 100%;
     background-image: linear-gradient(to bottom right, purple, orange);
 }
+
 h1 {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
 .topic {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 40pt;
 }
+
 form, div, #homepageHeader {
     margin: 5px;
     text-align: center;
 }
+
 input {
     margin: 5px;
     border-radius: 5px;
@@ -21,6 +25,7 @@ input {
     width: 270px;
     height: 3px;
 }
+
 #btn {
     font-size: 15px;
     border: none;
@@ -34,16 +39,19 @@ input {
     margin: 25px;
     cursor: pointer;
 }
+
 p {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: center;
 }
+
 #errorMessage {
     font-size: 15px;
     color: red;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: center;
 }
+
 #movePrev {
     display:inline;
     float:left;
@@ -51,6 +59,7 @@ p {
     font-size: 50pt;
     cursor: pointer;
 }
+
 #moveNext {
     display:inline;
     float:right;

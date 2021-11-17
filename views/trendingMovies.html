@@ -4,15 +4,23 @@
     <head>
         <link rel="stylesheet" href="/stylesheets/style1.css">
         <link rel="stylesheet" href="/stylesheets/sortableTable.css">
+        <link rel="stylesheet" href="/stylesheets/navBar.css">
     </head>
 
     <body>
         <header>
-            <h1 onclick='goBack()'>Find Your Flix</h1>
+            <h1 id="appTitle" onclick="goBack()">Find Your Flix</h1>
+            <nav>
+                <ul class="navList">
+                    <li class="navItem"><a class="navLink" href="/account/trending">Trending</a></li>
+                    <li class="navItem"><a class="navLink" href="/account/now_playing">Now Playing</a></li>
+                    <li class="navItem"><a class="navLink" href="#">Settings</a></li>
+                </ul>
+            </nav>
         </header>
         <div>
             <h1 id="name">Trending: </h1>
-
+            <br>
             <main>
                 <table>
                     <thead>
