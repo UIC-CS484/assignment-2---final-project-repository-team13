@@ -4,12 +4,11 @@
     <head>
         <link rel="stylesheet" href="/stylesheets/style1.css">
         <link rel="stylesheet" href="/stylesheets/navBar.css">
-        <title>Flix - Account Page</title>
     </head>
 
     <body>
         <header>
-            <h1 id="appTitle" onclick="goBack()"><img src="/resources/Logo.png" alt="Logo"></h1>
+            <h1 id="appTitle" onclick="goBack()">Find Your Flix</h1>
             <nav>
                 <ul class="navList">
                     <li class="navItem"><a class="navLink" href="/account/trending">Trending</a></li>
@@ -20,10 +19,19 @@
             </nav>
         </header>
         <div>
-            <h1 id="name"></h1>
+            <h1>Settings</h1>
+            <br>
+            <p>Change Password:</p>
+            <form id="changePasswordForm">
+                <input id='newpass' type="password" placeholder="Enter New Password">
+                <button id='passBtn' class='btn' type="button">Change Password</button>
+                <h2 id="message"></h2>
+            </form>
+            <p>Delete Account:</p>
+            <button id='deleteBtn' class='btn' type="button">Delete Account</button>
         </div>
     </body>
 
-    <script src="/javascripts/account.js"></script>
+    <script src="/javascripts/settings.js"></script>
 
 </html>

@@ -7,3 +7,7 @@ fetch('http://localhost:3000/user')
     .catch((error) => {
         console.error('Error:', error);
     });
+
+function goBack() {
+    location.href = '/account';
+}
