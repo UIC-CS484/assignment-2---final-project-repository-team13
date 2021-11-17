@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 25px;
+}
+
+#appTitle {
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.navList, .navItem, .navLink {
+    font-weight: 500;
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.navList {
+    list-style: none;
+}
+
+.navItem {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.navLink {
+    transition: all 0.3s ease 0s;
+}
+
+.navLink:hover { 
+    color: white;
+}

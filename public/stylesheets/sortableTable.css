@@ -7,6 +7,7 @@ th {
     background-color: orangered;
     color: white;
     padding: 4px 30px 4px 8px;
+    cursor: pointer;
 }
 
 td {
