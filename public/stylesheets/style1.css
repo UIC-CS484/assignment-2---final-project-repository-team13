@@ -26,7 +26,7 @@ input {
     height: 3px;
 }
 
-#btn {
+#btn, .btn {
     font-size: 15px;
     border: none;
     border-radius: 5px;
@@ -48,6 +48,13 @@ p {
 #errorMessage {
     font-size: 15px;
     color: red;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+#message {
+    font-size: 15px;
+    color: green;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: center;
 }

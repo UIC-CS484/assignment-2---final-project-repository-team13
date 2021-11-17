@@ -19,10 +19,19 @@
             </nav>
         </header>
         <div>
-            <h1 id="name"></h1>
+            <h1>Settings</h1>
+            <br>
+            <p>Change Password:</p>
+            <form id="changePasswordForm">
+                <input id='newpass' type="password" placeholder="Enter New Password">
+                <button id='passBtn' class='btn' type="button">Change Password</button>
+                <h2 id="message"></h2>
+            </form>
+            <p>Delete Account:</p>
+            <button id='deleteBtn' class='btn' type="button">Delete Account</button>
         </div>
     </body>
 
-    <script src="/javascripts/account.js"></script>
+    <script src="/javascripts/settings.js"></script>
 
 </html>
