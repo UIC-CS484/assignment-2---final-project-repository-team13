@@ -4,7 +4,8 @@ CREATE TABLE IF NOT EXISTS User (
 	password TEXT NOT NULL,
 	first_name TEXT,
 	last_name TEXT,
-	PRIMARY KEY("userID" AUTOINCREMENT)
+	PRIMARY KEY("userID" AUTOINCREMENT),
+	CONSTRAINT email_unique UNIQUE (email)
 );
 
 CREATE TABLE IF NOT EXISTS Movies (
@@ -16,6 +17,7 @@ CREATE TABLE IF NOT EXISTS Movies (
 	description TEXT,
 	genre TEXT,
 	PRIMARY KEY("movieID" AUTOINCREMENT)
+	CONSTRAINT name_unique UNIQUE (name)
 );
 
 CREATE TABLE IF NOT EXISTS Rating (
@@ -37,6 +39,7 @@ CREATE TABLE IF NOT EXISTS Actor (
 	dob datetime,
 	history TEXT,
 	PRIMARY KEY("actorID" AUTOINCREMENT)
+	CONSTRAINT name_unique UNIQUE (name)
 );
 
 CREATE TABLE IF NOT EXISTS Act (
