@@ -32,6 +32,7 @@ input {
     width: 200px;
     height: 35px;
     margin: 25px;
+    cursor: pointer;
 }
 p {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -48,10 +49,12 @@ p {
     float:left;
     margin-left: 40%;
     font-size: 50pt;
+    cursor: pointer;
 }
 #moveNext {
     display:inline;
     float:right;
     margin-right: 40%;
     font-size: 50pt;
+    cursor: pointer;
 }
