@@ -28,7 +28,6 @@ module.exports = app => {
         let username = req.body.email
         let newPassword = req.body.password
 
-        const saltRound = saltRound
         const salt = bcrypt.genSaltSync(saltRound)
         const hashPass = bcrypt.hashSync(newPassword, salt)
 

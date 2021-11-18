@@ -15,11 +15,16 @@ header {
     cursor: pointer;
 }
 
+.navItem:hover {
+    text-shadow: 0 0 35px #F8F8F8;
+}
+
 .navList, .navItem, .navLink {
+    font-family: 'Lato', sans-serif;
+    color: #FFFFFA;
+    text-decoration: none;
     font-weight: 500;
     font-size: 20px;
-    text-decoration: none;
-    color: black;
 }
 
 .navList {
