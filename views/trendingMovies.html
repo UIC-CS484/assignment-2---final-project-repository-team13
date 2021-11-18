@@ -2,14 +2,16 @@
 <html lang="en">
 
     <head>
-        <link rel="stylesheet" href="/stylesheets/style1.css">
+        <link rel="stylesheet" href="/stylesheets/home.css">
         <link rel="stylesheet" href="/stylesheets/sortableTable.css">
         <link rel="stylesheet" href="/stylesheets/navBar.css">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <title>Flix - Trending Movies</title>
     </head>
 
     <body>
         <header>
-            <h1 id="appTitle" onclick="goBack()">Find Your Flix</h1>
+            <h1 id="appTitle" onclick="goBack()"><img src="/resources/Logo.png" alt="Logo"></h1>
             <nav>
                 <ul class="navList">
                     <li class="navItem"><a class="navLink" href="/account/trending">Trending</a></li>
@@ -20,7 +22,7 @@
             </nav>
         </header>
         <div>
-            <h1 id="name">Trending: </h1>
+            <h1 id="name" class="simpleTextHeader">Trending: </h1>
             <br>
             <main>
                 <table>
@@ -36,7 +38,7 @@
                 </table>
                 <div class='pageBtns'>
                     <h2 id='movePrev' onclick='moveToPrevPage()'></h2>
-                    <h2 id='moveNext' onclick='moveToNextPage()'>&rarr;</h2>
+                    <h2 id='moveNext' onclick='moveToNextPage()'><img src="/resources/Next.png" alt="Next"></h2>
                 </div>
             </main>
 

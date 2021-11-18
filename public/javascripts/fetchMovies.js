@@ -73,7 +73,7 @@ function moveToPrevPage() {
 }
 
 function moveToNextPage() {
-    document.getElementById('movePrev').innerHTML = "&larr;";
+    document.getElementById('movePrev').innerHTML = `<img src="/resources/Previous.png" alt="Next">`;
     pageNum = pageNum + 1;
     whichFetch();
 }
