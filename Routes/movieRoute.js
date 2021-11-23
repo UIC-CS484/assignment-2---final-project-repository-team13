@@ -1,7 +1,4 @@
 const requireLogin = require('./requireLogin')
-const axios = require('axios')
-const config = require('../config')
-const bodyParser = require('body-parser')
 const db = require('../services/database')
 
 function insertIntoAction(action, movieID, userId) {
@@ -58,6 +55,17 @@ function getMovieByAction(userId, action) {
                 return rej([])
             }
             res(rows)
+        })
+    })
+}
+
+function removeLikeFromMovie(userId, movieId) {
+    return new Promise((res, rej) => {
+        db.run("DELETE FROM UserAction WHERE userID = ? AND movieID = ?", [userId, movieId], (err) => {
+            if (err) {
+                return rej({ success: false, error: err.message });
+            }
+            res({success: true})
         })
     })
 }
@@ -136,7 +144,41 @@ module.exports = app => {
     })
     
     // API For user to remove like from film
+    // Can't remove a movie already watched
     app.delete('/api/like', requireLogin, async (req, res) => {
+        const action = 'like'
+        const email = req.user.email
+        const movie = req.body.movie
 
+        if (!movie || !email) return res.status(404).send({status: false, message: `Body Is Missing`})
+
+        let movieId = undefined
+        let userId = undefined
+
+        // Get Movie List
+        try {
+            let listMovieId = await getMovieIdByName(movie)
+            movieId = listMovieId[0]
+        } catch (e) { console.log("get movie", e.message) }
+
+        // Get User Id
+        try {
+            let listUserId = await getUserIdByName(email)
+            userId = listUserId[0]
+        } catch (e) { console.log("get user id", e.message) }
+
+
+        if (!movieId || !userId) {
+            return res.status(404).send({status: false, message: `MovieID and UserId Not Found`})
+        }
+
+        // Remove Like
+        try {
+            let result = await removeLikeFromMovie(userId.userID, movieId.movieID)
+            res.status(200).send(result)
+        } catch (e) {
+            console.log(e)
+            res.status(404).send({status: false, message: e.message})
+        }
     })
 }
