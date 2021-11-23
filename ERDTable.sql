@@ -12,23 +12,22 @@ CREATE TABLE IF NOT EXISTS Movies (
 	movieID INTEGER NOT NULL,
 	name TEXT NOT NULL,
 	rating TEXT NOT NULL,
-	director TEXT,
+	image TEXT,
 	release_date datetime,
 	description TEXT,
-	genre TEXT,
 	PRIMARY KEY("movieID" AUTOINCREMENT)
 	CONSTRAINT name_unique UNIQUE (name)
 );
 
-CREATE TABLE IF NOT EXISTS Rating (
+CREATE TABLE IF NOT EXISTS UserAction (
 	ratingID INTEGER NOT NULL,
 	userID INTEGER NOT NULL,
 	movieID INTEGER NOT NULL,
-	rating INTEGER,
-	comment TEXT,
+	userAction TEXT,
 	FOREIGN KEY (userID) REFERENCES User (userID),
 	FOREIGN KEY (movieID) REFERENCES Movies (movieID),
 	PRIMARY KEY("ratingID" AUTOINCREMENT)
+	UNIQUE(userID, movieID, userAction) ON CONFLICT REPLACE
 );
 
 CREATE TABLE IF NOT EXISTS Actor (

@@ -32,3 +32,6 @@ makes it easier for users to compare movies. Comparing items using charts can be
 lot more variables, than just 2 or 3. For example our sortable table has 4 which users can compare and interact with ("popularity rank", "title", "rating", and "number of 
 people that rated the movie").
 ```
+## Color Schema
+
+https://coolors.co/191610-40434e-702632-912f40-fffffa

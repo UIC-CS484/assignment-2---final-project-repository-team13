@@ -29,7 +29,8 @@ app.use(passport.session())
 app.use(express.static('public'));
 
 require('./routes/authRoutes')(app)
-require('./routes/movieRoutes')(app)
+require('./routes/movieAPI')(app)
+require('./routes/movieRoute')(app)
 require('./routes/viewRoutes')(app)
 
 const PORT = 3000 || process.env.PORT
