@@ -15,13 +15,15 @@ function insertIntoAction(action, movieID, userId) {
 
 function insertIntoMovie(movie) {
     return new Promise((res, rej) => {
-        db.run("INSERT INTO Movies (name, rating, image, release_date, description) VALUES (?, ?, ?, ?, ?)", 
-                    [movie.title, "0", movie.image, movie.release_date, movie.description], 
-                    (err) => {
+        db.run("INSERT INTO Movies (name, rating, image, release_date, description) VALUES (?, ?, ?, ?, ?)",
+                    [movie.title, "0", movie.poster_path, movie.release_date, movie.overview], 
+                    function (err) {
+
             if (err) {
-                return rej({ success: false, error: err.message });
+                return rej([]);
             }
-            res({success: true})
+
+            res([{movieID: this.lastID}])
         }) 
     })
 }
@@ -125,7 +127,7 @@ module.exports = app => {
         if (!movieId) {
             // INSERT INTO MOVIES 
             try {
-                await insertIntoMovie(movie)
+                let listMovieId = await insertIntoMovie(movie)
             } catch (e) { console.log("insert movie", e.message) }
         }
 
