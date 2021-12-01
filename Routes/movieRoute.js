@@ -128,6 +128,7 @@ module.exports = app => {
             // INSERT INTO MOVIES 
             try {
                 let listMovieId = await insertIntoMovie(movie)
+                movieId = listMovieId[0];
             } catch (e) { console.log("insert movie", e.message) }
         }
 
