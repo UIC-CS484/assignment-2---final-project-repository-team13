@@ -4,8 +4,6 @@ let watchedMovies; // List of all watched movies
 let pageNum = 1;
 let whichFetch;
 
-getLikedMovies();
-getWatchedMovies();
 whichDoc();
 whichFetch();
 
@@ -13,9 +11,17 @@ function whichDoc() {
     var fileName = location.pathname.split("/").slice(-1);
     console.log(fileName);
     if (fileName == 'trending') {
-        whichFetch = () => {getTrendingMovies();};
+        whichFetch = () => {
+            getLikedMovies();
+            getWatchedMovies();
+            getTrendingMovies();
+        };
     } else if (fileName == 'now_playing') {
-        whichFetch = () => {getNowPlayingMovies();};
+        whichFetch = () => {
+            getLikedMovies();
+            getWatchedMovies();
+            getNowPlayingMovies();
+        };
     }
 }
 
@@ -26,7 +32,7 @@ function goBack() {
 function reprintTable() {
     let tableRows = '';
     for (let i = 0; i < movies.length; i++) {
-        tableRows = tableRows + '<tr> <td>' + movies[i].rank + '</td> <td>' + movies[i].title + '</td> <td>' + movies[i].vote_average + '</td> <td>' + movies[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + movies[i].liked + '</td> <td>+</td> </tr>';
+        tableRows = tableRows + '<tr> <td>' + movies[i].rank + '</td> <td>' + movies[i].title + '</td> <td>' + movies[i].vote_average + '</td> <td>' + movies[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + movies[i].liked + "</td> <td onclick='addWatch( "+i+")'>" + movies[i].watched + '</td> </tr>';    
     }
     document.getElementById('tableBody').innerHTML = tableRows;
 }
@@ -53,6 +59,33 @@ function getWatchedMovies() {
         .catch((error) => {
             console.error('Error:', error);
         });
+}
+
+function addWatch (index) {
+    if (movies[index].watched == 'watch') { // Currently not watched
+        movies[index].watched = 'watched'
+
+        let movieInfo = {
+            movie: movies[index]
+        }
+
+        fetch('http://localhost:3000/api/watch', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(movieInfo),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+        reprintTable();
+    }
 }
 
 function changeLike(index) {
@@ -131,7 +164,7 @@ function getTrendingMovies() {
             for (let i = 0; i < data.length; i++) {
                 for (let j = 0; j < watchedMovies.length; j++) {
                     if (data[i].title == watchedMovies[j].name) {
-                        data[i].liked = '&#9829;';
+                        data[i].watched = 'watched';
                         break;
                     }
                 }
@@ -139,7 +172,7 @@ function getTrendingMovies() {
             movies = data;
             let tableRows = '';
             for (let i = 0; i < movies.length; i++) {
-                tableRows = tableRows + '<tr> <td>' + data[i].rank + '</td> <td>' + data[i].title + '</td> <td>' + data[i].vote_average + '</td> <td>' + data[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + data[i].liked + '</td> <td>+</td> </tr>';
+                tableRows = tableRows + '<tr> <td>' + data[i].rank + '</td> <td>' + data[i].title + '</td> <td>' + data[i].vote_average + '</td> <td>' + data[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + data[i].liked + "</td> <td onclick='addWatch( "+i+")'>" + data[i].watched + '</td> </tr>';
             }
             document.getElementById('tableBody').innerHTML = tableRows;
         })
@@ -156,6 +189,7 @@ function getNowPlayingMovies() {
             for (let i = 0; i < data.length; i++) {
                 data[i].rank = ((pageNum-1)*20) + i + 1;
                 data[i].liked = '&#9825;';
+                data[i].watched = 'watch';
             }
             for (let i = 0; i < data.length; i++) {
                 for (let j = 0; j < likedMovies.length; j++) {
@@ -165,10 +199,18 @@ function getNowPlayingMovies() {
                     }
                 }
             }
+            for (let i = 0; i < data.length; i++) {
+                for (let j = 0; j < watchedMovies.length; j++) {
+                    if (data[i].title == watchedMovies[j].name) {
+                        data[i].watched = 'watched';
+                        break;
+                    }
+                }
+            }
             movies = data;
             let tableRows = '';
             for (let i = 0; i < movies.length; i++) {
-                tableRows = tableRows + '<tr> <td>' + data[i].rank + '</td> <td>' + data[i].title + '</td> <td>' + data[i].vote_average + '</td> <td>' + data[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + data[i].liked + '</td> <td>+</td> </tr>';
+                tableRows = tableRows + '<tr> <td>' + data[i].rank + '</td> <td>' + data[i].title + '</td> <td>' + data[i].vote_average + '</td> <td>' + data[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + data[i].liked + "</td> <td onclick='addWatch( "+i+")'>" + data[i].watched + '</td> </tr>';            
             }
             document.getElementById('tableBody').innerHTML = tableRows;
         })
@@ -231,7 +273,7 @@ function sortByRank() {
             temp = movies[i];
             movies[i] = movies[index];
             movies[index] = temp;
-            tableRows = tableRows + '<tr> <td>' + movies[i].rank + '</td> <td>' + movies[i].title + '</td> <td>' + movies[i].vote_average + '</td> <td>' + movies[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + movies[i].liked + '</td> <td>+</td> </tr>';
+            tableRows = tableRows + '<tr> <td>' + movies[i].rank + '</td> <td>' + movies[i].title + '</td> <td>' + movies[i].vote_average + '</td> <td>' + movies[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + movies[i].liked + "</td> <td onclick='addWatch( "+i+")'>" + movies[i].watched + '</td> </tr>';
             resetTableHeaders();
             document.getElementById('rank').innerHTML = 'Rank ▼';
         }
@@ -248,7 +290,7 @@ function sortByRank() {
             temp = movies[i];
             movies[i] = movies[index];
             movies[index] = temp;
-            tableRows = tableRows + '<tr> <td>' + movies[i].rank + '</td> <td>' + movies[i].title + '</td> <td>' + movies[i].vote_average + '</td> <td>' + movies[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + movies[i].liked + '</td> <td>+</td> </tr>';
+            tableRows = tableRows + '<tr> <td>' + movies[i].rank + '</td> <td>' + movies[i].title + '</td> <td>' + movies[i].vote_average + '</td> <td>' + movies[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + movies[i].liked + "</td> <td onclick='addWatch( "+i+")'>" + movies[i].watched + '</td> </tr>';
             resetTableHeaders();
             rankAsc = true;
             document.getElementById('rank').innerHTML = 'Rank ▲';
@@ -275,7 +317,7 @@ function sortByTitle() {
             temp = movies[i];
             movies[i] = movies[index];
             movies[index] = temp;
-            tableRows = tableRows + '<tr> <td>' + movies[i].rank + '</td> <td>' + movies[i].title + '</td> <td>' + movies[i].vote_average + '</td> <td>' + movies[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + movies[i].liked + '</td> <td>+</td> </tr>';
+            tableRows = tableRows + '<tr> <td>' + movies[i].rank + '</td> <td>' + movies[i].title + '</td> <td>' + movies[i].vote_average + '</td> <td>' + movies[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + movies[i].liked + "</td> <td onclick='addWatch( "+i+")'>" + movies[i].watched + '</td> </tr>';
             resetTableHeaders();
             document.getElementById('title').innerHTML = 'Title ▼';
         }
@@ -292,7 +334,7 @@ function sortByTitle() {
             temp = movies[i];
             movies[i] = movies[index];
             movies[index] = temp;
-            tableRows = tableRows + '<tr> <td>' + movies[i].rank + '</td> <td>' + movies[i].title + '</td> <td>' + movies[i].vote_average + '</td> <td>' + movies[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + movies[i].liked + '</td> <td>+</td> </tr>';
+            tableRows = tableRows + '<tr> <td>' + movies[i].rank + '</td> <td>' + movies[i].title + '</td> <td>' + movies[i].vote_average + '</td> <td>' + movies[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + movies[i].liked + "</td> <td onclick='addWatch( "+i+")'>" + movies[i].watched + '</td> </tr>';
             resetTableHeaders();
             titleAsc = true;
             document.getElementById('title').innerHTML = 'Title ▲';
@@ -319,7 +361,7 @@ function sortByRating() {
             temp = movies[i];
             movies[i] = movies[index];
             movies[index] = temp;
-            tableRows = tableRows + '<tr> <td>' + movies[i].rank + '</td> <td>' + movies[i].title + '</td> <td>' + movies[i].vote_average + '</td> <td>' + movies[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + movies[i].liked + '</td> <td>+</td> </tr>';
+            tableRows = tableRows + '<tr> <td>' + movies[i].rank + '</td> <td>' + movies[i].title + '</td> <td>' + movies[i].vote_average + '</td> <td>' + movies[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + movies[i].liked + "</td> <td onclick='addWatch( "+i+")'>" + movies[i].watched + '</td> </tr>';
             resetTableHeaders();
             ratingAsc = true;
             document.getElementById('rating').innerHTML = 'Rating ▲';
@@ -337,7 +379,7 @@ function sortByRating() {
             temp = movies[i];
             movies[i] = movies[index];
             movies[index] = temp;
-            tableRows = tableRows + '<tr> <td>' + movies[i].rank + '</td> <td>' + movies[i].title + '</td> <td>' + movies[i].vote_average + '</td> <td>' + movies[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + movies[i].liked + '</td> <td>+</td> </tr>';
+            tableRows = tableRows + '<tr> <td>' + movies[i].rank + '</td> <td>' + movies[i].title + '</td> <td>' + movies[i].vote_average + '</td> <td>' + movies[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + movies[i].liked + "</td> <td onclick='addWatch( "+i+")'>" + movies[i].watched + '</td> </tr>';
             resetTableHeaders();
             document.getElementById('rating').innerHTML = 'Rating ▼';
         }
@@ -363,7 +405,7 @@ function sortByNumOfRate() {
             temp = movies[i];
             movies[i] = movies[index];
             movies[index] = temp;
-            tableRows = tableRows + '<tr> <td>' + movies[i].rank + '</td> <td>' + movies[i].title + '</td> <td>' + movies[i].vote_average + '</td> <td>' + movies[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + movies[i].liked + '</td> <td>+</td> </tr>';
+            tableRows = tableRows + '<tr> <td>' + movies[i].rank + '</td> <td>' + movies[i].title + '</td> <td>' + movies[i].vote_average + '</td> <td>' + movies[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + movies[i].liked + "</td> <td onclick='addWatch( "+i+")'>" + movies[i].watched + '</td> </tr>';
             resetTableHeaders();
             numRateAsc = true;
             document.getElementById('numOfRate').innerHTML = 'Number of Ratings ▲';
@@ -381,7 +423,7 @@ function sortByNumOfRate() {
             temp = movies[i];
             movies[i] = movies[index];
             movies[index] = temp;
-            tableRows = tableRows + '<tr> <td>' + movies[i].rank + '</td> <td>' + movies[i].title + '</td> <td>' + movies[i].vote_average + '</td> <td>' + movies[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + movies[i].liked + '</td> <td>+</td> </tr>';
+            tableRows = tableRows + '<tr> <td>' + movies[i].rank + '</td> <td>' + movies[i].title + '</td> <td>' + movies[i].vote_average + '</td> <td>' + movies[i].vote_count + "</td> <td onclick='changeLike( "+i+")'>" + movies[i].liked + "</td> <td onclick='addWatch( "+i+")'>" + movies[i].watched + '</td> </tr>';
             resetTableHeaders();
             document.getElementById('numOfRate').innerHTML = 'Number of Ratings ▼';
         }
