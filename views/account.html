@@ -6,6 +6,44 @@
         <link rel="stylesheet" href="/stylesheets/navBar.css">
         <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
         <title>Flix - Account Page</title>
+        <style>
+            .pageBtns {
+                margin-bottom: 100px;
+                cursor: pointer;
+            }
+            #movePrevWatched, #movePrevLiked {
+                display:inline;
+                float:left;
+                margin-left: 40%;
+            }
+            #moveNextWatched, #moveNextLiked {
+                display:inline;
+                float:right;
+                margin-right: 40%;
+            }
+            .yourMovies {
+                color: #488F7E;
+                text-align: left;
+            }
+            #watchedMovies {
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: space-evenly;
+            }
+            #likedMovies {
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: space-evenly;
+            }
+            .movieItem {
+                flex: 0 1 auto;
+            }
+            .moviePoster {
+                width: 150px;
+                height: 200px;
+                border-radius: 30px;
+            }
+        </style>
     </head>
 
     <body>
@@ -23,6 +61,23 @@
         </header>
         <div>
             <h1 id="name" class="simpleTextHeader"></h1>
+            <br><br>
+            <h1 class="yourMovies">Your Watched Movies:</h1>
+            <br><br>
+            <div id="watchedMovies"></div>
+            <br><br>
+            <div class='pageBtns'>
+                <h2 id='movePrevWatched' onclick='moveToPrevPage("watched")'></h2>
+                <h2 id='moveNextWatched' onclick='moveToNextPage("watched")'><img src="/resources/Next.png" alt="Next"></h2>
+            </div>       
+            <h1 class="yourMovies">Your Liked Movies:</h1>
+            <br><br>
+            <div id="likedMovies"></div> 
+            <br><br>
+            <div class='pageBtns'>
+                <h2 id='movePrevLiked' onclick='moveToPrevPage("liked")'></h2>
+                <h2 id='moveNextLiked' onclick='moveToNextPage("liked")'><img src="/resources/Next.png" alt="Next"></h2>
+            </div>
         </div>
     </body>
 
