@@ -1,9 +1,11 @@
 let movies; // Will Hold the one page of movies at a time
 let likedMovies; // List of all liked movies
+let watchedMovies; // List of all watched movies
 let pageNum = 1;
 let whichFetch;
 
 getLikedMovies();
+getWatchedMovies();
 whichDoc();
 whichFetch();
 
@@ -35,6 +37,18 @@ function getLikedMovies() {
         .then(data => {
             console.log(data);
             likedMovies = data;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
+
+function getWatchedMovies() {
+    fetch('http://localhost:3000/api/watch')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            watchedMovies = data;
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -104,10 +118,19 @@ function getTrendingMovies() {
             for (let i = 0; i < data.length; i++) {
                 data[i].rank = ((pageNum-1)*20) + i + 1;
                 data[i].liked = '&#9825;';
+                data[i].watched = 'watch';
             }
             for (let i = 0; i < data.length; i++) {
                 for (let j = 0; j < likedMovies.length; j++) {
-                    if (data[i].id == likedMovies[j].id) {
+                    if (data[i].title == likedMovies[j].name) {
+                        data[i].liked = '&#9829;';
+                        break;
+                    }
+                }
+            }
+            for (let i = 0; i < data.length; i++) {
+                for (let j = 0; j < watchedMovies.length; j++) {
+                    if (data[i].title == watchedMovies[j].name) {
                         data[i].liked = '&#9829;';
                         break;
                     }
@@ -136,7 +159,7 @@ function getNowPlayingMovies() {
             }
             for (let i = 0; i < data.length; i++) {
                 for (let j = 0; j < likedMovies.length; j++) {
-                    if (data[i].id == likedMovies[j].id) {
+                    if (data[i].title == likedMovies[j].name) {
                         data[i].liked = '&#9829;';
                         break;
                     }
