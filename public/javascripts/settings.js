@@ -1,6 +1,6 @@
 let user;
 
-fetch('http://localhost:3000/user')
+fetch('/user')
     .then(response => response.json())
     .then(data => {
         console.log(data);
@@ -23,7 +23,7 @@ document.querySelector('#passBtn').addEventListener('click', (e) => {
         password: document.getElementById('newpass').value,
     }
 
-    fetch('http://localhost:3000/api/password', {
+    fetch('/api/password', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ document.querySelector('#deleteBtn').addEventListener('click', (e) => {
         email: user.email,
     }
 
-    fetch('http://localhost:3000/api/account', {
+    fetch('/api/account', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',

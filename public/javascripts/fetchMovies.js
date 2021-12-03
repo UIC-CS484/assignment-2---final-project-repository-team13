@@ -38,7 +38,7 @@ function reprintTable() {
 }
 
 function getLikedMovies() {
-    fetch('http://localhost:3000/api/like')
+    fetch('/api/like')
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -50,7 +50,7 @@ function getLikedMovies() {
 }
 
 function getWatchedMovies() {
-    fetch('http://localhost:3000/api/watch')
+    fetch('/api/watch')
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -69,7 +69,7 @@ function addWatch (index) {
             movie: movies[index]
         }
 
-        fetch('http://localhost:3000/api/watch', {
+        fetch('/api/watch', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ function addLike (index) {
         movie: movies[index]
     }
 
-    fetch('http://localhost:3000/api/like', {
+    fetch('/api/like', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -127,7 +127,7 @@ function removeLike (index) {
         movie: movies[index]
     }
 
-    fetch('http://localhost:3000/api/like', {
+    fetch('/api/like', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -144,7 +144,7 @@ function removeLike (index) {
 }
 
 function getTrendingMovies() {
-    fetch('http://localhost:3000/movie/trending?page=' + pageNum)
+    fetch('/movie/trending?page=' + pageNum)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -182,7 +182,7 @@ function getTrendingMovies() {
 }
 
 function getNowPlayingMovies() {
-    fetch('http://localhost:3000/movie/now_playing?page=' + pageNum)
+    fetch('/movie/now_playing?page=' + pageNum)
         .then(response => response.json())
         .then(data => {
             console.log(data);
