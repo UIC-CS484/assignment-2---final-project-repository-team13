@@ -37,7 +37,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
-          usedocker: true
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "flix-project"
           heroku_email: "tnguy276@uic.edu"
