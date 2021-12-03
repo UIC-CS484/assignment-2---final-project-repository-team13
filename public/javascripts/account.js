@@ -3,7 +3,7 @@ let likedMovies;
 let watchedPage = 1;
 let likedPage = 1;
 
-fetch('http://localhost:3000/user')
+fetch('/user')
     .then(response => response.json())
     .then(data => {
         console.log(data);
@@ -13,7 +13,7 @@ fetch('http://localhost:3000/user')
         console.error('Error:', error);
 });
 
-fetch('http://localhost:3000/api/watch')
+fetch('/api/watch')
     .then(response => response.json())
     .then(data => {
         console.log(data);
@@ -33,7 +33,7 @@ fetch('http://localhost:3000/api/watch')
         console.error('Error:', error);
 });
 
-fetch('http://localhost:3000/api/like')
+fetch('/api/like')
     .then(response => response.json())
     .then(data => {
         console.log(data);

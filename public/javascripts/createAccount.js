@@ -11,7 +11,7 @@ document.querySelector('#btn').addEventListener('click', (e) => {
             password: document.getElementById('pass').value
         }
 
-        fetch('http://localhost:3000/api/signup', {
+        fetch('/api/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
