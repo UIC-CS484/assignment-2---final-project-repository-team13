@@ -28,9 +28,9 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(express.static('public'));
 
-require('./routes/authRoutes')(app)
-require('./routes/movieAPI')(app)
-require('./routes/movieRoute')(app)
-require('./routes/viewRoutes')(app)
+require('./Routes/authRoutes')(app)
+require('./Routes/movieAPI')(app)
+require('./Routes/movieRoute')(app)
+require('./Routes/viewRoutes')(app)
 
 module.exports = app
