@@ -53,7 +53,7 @@ describe('When new user coming to the website and start to like and watch movies
         let movieList = await request.get(`/movie/trending?page=${randomPage}`).expect(200)
 
         let movieListJson = movieList.body
-        let ranMovieLen = getRandomInt(movieListJson.length)
+        let ranMovieLen = getRandomInt(movieListJson.length - 1)
         let ranMovie = movieListJson[ranMovieLen]
 
         let like = await request
@@ -68,7 +68,7 @@ describe('When new user coming to the website and start to like and watch movies
         let movieList = await request.get(`/movie/trending?page=${randomPage}`).expect(200)
 
         let movieListJson = movieList.body
-        let ranMovieLen = getRandomInt(movieListJson.length)
+        let ranMovieLen = getRandomInt(movieListJson.length - 1)
         let ranMovie = movieListJson[ranMovieLen]
 
         let like = await request
