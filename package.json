@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --detectOpenHandles"
   },
   "keywords": [],
   "author": "",
@@ -17,10 +17,16 @@
     "connect-sqlite3": "^0.9.12",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
-    "jest": "^27.3.1",
     "nodeman": "^1.1.2",
     "passport": "^0.5.0",
     "passport-local": "^1.0.0",
     "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^27.4.3",
+    "superagent": "^6.1.0",
+    "supertest": "^6.1.6"
   }
 }

@@ -24,7 +24,7 @@ module.exports = app => {
         if (password.length < 8) return res.status(404).send({success: false, error: 'password is not strong enough'})
         if (username == password) return res.status(404).send({success: false, error: 'password is easy to guess'})
         if (restrictedPasswordSet.has(password)) return res.status(404).send({success: false, error: 'restricted password'})
-        if (!(regex.test(password))) return res.status(404).send({success: false, error: 'password need to have alphabet letters'})
+        if (regex.test(password)) return res.status(404).send({success: false, error: 'password need to have alphabet letters'})
 
         const salt = bcrypt.genSaltSync(saltRound)
         const hashPass = bcrypt.hashSync(password, salt)
@@ -38,13 +38,13 @@ module.exports = app => {
     })
 
     app.put('/api/password', requireLogin, (req, res) => {
-        let username = req.body.email
+        let username = req.user.email
         let newPassword = req.body.password
 
         if (newPassword.length < 8) return res.status(404).send({success: false, error: 'password is not strong enough'})
         if (username == newPassword) return res.status(404).send({success: false, error: 'password is easy to guess'})
         if (restrictedPasswordSet.has(newPassword)) return res.status(404).send({success: false, error: 'restricted password'})
-        if (!(regex.test(restrictedPasswordSet))) return res.status(404).send({success: false, error: 'password need to have alphabet letters'})
+        if (regex.test(restrictedPasswordSet)) return res.status(404).send({success: false, error: 'password need to have alphabet letters'})
 
         const salt = bcrypt.genSaltSync(saltRound)
         const hashPass = bcrypt.hashSync(newPassword, salt)
@@ -58,7 +58,7 @@ module.exports = app => {
     })
 
     app.delete('/api/account', requireLogin, (req, res) => {
-        let username = req.body.email
+        let username = req.user.email
 
         db.run('DELETE from User WHERE email = ?', [username], (err) => {
             if (err) {
