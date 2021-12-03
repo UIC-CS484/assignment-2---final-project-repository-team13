@@ -6,12 +6,25 @@ const db = require('../services/database')
 const requireLogin = require('./requireLogin');
 const ifNotLoggedIn = require('./ifNotLoggedIn');
 
+let restrictedPasswordSet = new Set()
+restrictedPasswordSet.add('12345678')
+restrictedPasswordSet.add('qwerty12')
+restrictedPasswordSet.add('asdfghjk')
+restrictedPasswordSet.add('zxcvbnm')
+
+let regex = /^\d+$/
+
 module.exports = app => {
     app.post('/api/signup', ifNotLoggedIn, (req, res) => {
         let firstname = req.body.firstname
         let lastname = req.body.lastname
         let username = req.body.email
         let password = req.body.password
+
+        if (password.length < 8) return res.status(404).send({success: false, error: 'password is not strong enough'})
+        if (username == password) return res.status(404).send({success: false, error: 'password is easy to guess'})
+        if (restrictedPasswordSet.has(password)) return res.status(404).send({success: false, error: 'restricted password'})
+        if (!(regex.test(password))) return res.status(404).send({success: false, error: 'password need to have alphabet letters'})
 
         const salt = bcrypt.genSaltSync(saltRound)
         const hashPass = bcrypt.hashSync(password, salt)
@@ -27,6 +40,11 @@ module.exports = app => {
     app.put('/api/password', requireLogin, (req, res) => {
         let username = req.body.email
         let newPassword = req.body.password
+
+        if (newPassword.length < 8) return res.status(404).send({success: false, error: 'password is not strong enough'})
+        if (username == newPassword) return res.status(404).send({success: false, error: 'password is easy to guess'})
+        if (restrictedPasswordSet.has(newPassword)) return res.status(404).send({success: false, error: 'restricted password'})
+        if (!(regex.test(restrictedPasswordSet))) return res.status(404).send({success: false, error: 'password need to have alphabet letters'})
 
         const salt = bcrypt.genSaltSync(saltRound)
         const hashPass = bcrypt.hashSync(newPassword, salt)
