@@ -35,3 +35,17 @@ people that rated the movie").
 ## Color Schema
 
 https://coolors.co/191610-40434e-702632-912f40-fffffa
+
+## Build With Docker
+
+build image from docker file
+
+```
+docker build --tag final-project .
+```
+
+create and run container from image
+
+```
+docker run -d -p 3000:3000 final-project
+```
