@@ -23,8 +23,13 @@ Tru Nguyen
 
 ```
 My name is tru nguyen, i'm a senior in CS, and my responsibility and role for this project is mainly lies in the back-end service, where i have to construct the endpoints,
-create database schema, I have to take care of the security when dealing with databases and api endpoints. I got to set-up connection to sqlite as well as passport services for the application, and CI/CD for the project
+create database schema, I have to take care of the security when dealing with databases and api endpoints. I got to set-up connection to sqlite as well as passport services for the application, and CI/CD for the project.
 ```
+
+Marko Glamocak
+```
+My name is Marko Glamocak, i'm a senior in CS, and my responsibilities/role in this project mainly lies in front end functionality. I was focused on bringing the backend functionality to life in the front-end. I implemented the sortable table in the trending and now playing tabs, I created the front end for logging in and creating an account (along with providing users with error messages when creating an account and changing their passwords), I designed the main account window which displays all the liked and watched movies, I added a like and watch functionality to the soratble table, I also focused on making the site responsive.
+``` 
 
 ## API Interaction
 
