@@ -63,7 +63,7 @@ function getMovieByAction(userId, action) {
 
 function removeLikeFromMovie(userId, movieId) {
     return new Promise((res, rej) => {
-        db.run("DELETE FROM UserAction WHERE userID = ? AND movieID = ?", [userId, movieId], (err) => {
+        db.run("DELETE FROM UserAction WHERE userID = ? AND movieID = ? AND userAction = 'like'", [userId, movieId], (err) => {
             if (err) {
                 return rej({ success: false, error: err.message });
             }
