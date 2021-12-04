@@ -44,7 +44,7 @@ module.exports = app => {
         if (newPassword.length < 8) return res.status(404).send({success: false, error: 'password is not strong enough'})
         if (username == newPassword) return res.status(404).send({success: false, error: 'password is easy to guess'})
         if (restrictedPasswordSet.has(newPassword)) return res.status(404).send({success: false, error: 'restricted password'})
-        if (regex.test(restrictedPasswordSet)) return res.status(404).send({success: false, error: 'password need to have alphabet letters'})
+        if (regex.test(newPassword)) return res.status(404).send({success: false, error: 'password need to have alphabet letters'})
 
         const salt = bcrypt.genSaltSync(saltRound)
         const hashPass = bcrypt.hashSync(newPassword, salt)
